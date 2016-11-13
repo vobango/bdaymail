@@ -3,43 +3,43 @@ import getpass
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
  
-addr_to   = input("Kellele kiri läheb? ")
+addr_to   = input("Mis meiliaadressile kiri läheb? ")
 addr_from = input("Kes kirja saadab? ")
  
 smtp_server = "smtp.gmail.com"
 smtp_user   = addr_from
 smtp_pass   = getpass.getpass("Sisesta parool: ")
 
-age = input("Kui vanaks kirja saaja saab? ")
+name = input("Mis on sünnipäevalapse nimi? ")
+age = input("Kui vanaks " + name + " saab? ")
 msg = MIMEMultipart('alternative')
 msg['To'] = addr_to
 msg['From'] = addr_from
 msg['Subject'] = age + ". hällipäev"
 
-text = "Palun kasuta normaalset meilboksi."
+text = "Õnnitlen sünnipäeva puhul!"
 html = """\
 <html>
 <head>
   <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-  <div class="email-background" style="max-width: 500px;background-color: #73f;text-align: center;font-family: sans-serif;color: rgba(255, 255, 255, 0.7);padding: 10px 20px;">
+  <div class="email-background" style="max-width: 500px;margin: 0px auto;background-color: #73f;text-align: center;font-family: sans-serif;color: rgba(255, 255, 255, 0.7);padding: 10px 20px;">
     <div class="pre-header" style="color: #73f;font-size: 1px;">
       Südamlikud ja musikaalsed õnnesoovid!
     </div>
     <div class="email-container" style="background: rgba(255, 255, 255, 0.1);border-radius: 5px;overflow: hidden;box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.5);">
-      <h1 style="line-height: 1.3;">Kallis sõber!<br>
+      <h1 style="line-height: 1.3;">Kallis {}!<br>
         Palju õnne!</h1>
       <img src="http://i.imgur.com/mEsGzqE.jpg" style="max-width: 100%;box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);">
-      <p style="font-size: 18px;line-height: 1.4;">Olgu uus aasta soojem ja seksikam kui eelmine.</p>
+      <p style="font-size: 18px;line-height: 1.4;">Tulgu uus aasta soojem ja seksikam kui eelmine.</p>
       <div class="vid-button" style="padding: 10px;"> <a href="https://www.youtube.com/watch?v=TZJUjKTJt4o" style="text-decoration: none;font-size: 22px;display: inline block;background: #f51;color: rgba(255, 255, 255, 0.7);padding: 10px 20px;border-radius: 5px;">Vaata tervitusvideot!</a></div>
-      <p style="font-size: 18px;line-height: 1.4;">Musi püksi!<br>
-        Kaspar</p>
+      <p style="font-size: 18px;line-height: 1.4;">Musi püksi!<br> Kaspar</p>
     </div>
   </div>
 </body>
 </html>
-"""
+""".format(name)
  
 part_plain = MIMEText(text, 'plain')
 part_html = MIMEText(html, 'html')
